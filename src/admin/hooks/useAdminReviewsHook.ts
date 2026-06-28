@@ -22,7 +22,7 @@ export const useAdminReviews = () => {
       setLoading(true);
       
       if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-        throw new Error("Credenziali Supabase mancanti.");
+        throw new Error("Credenziali Supabase mancanti. Assicurati di aver creato un file .env con VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.");
       }
 
       // Tenta di ripristinare la sessione di Supabase (se assente ma siamo loggati col PIN)

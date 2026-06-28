@@ -18,7 +18,13 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-      - run: npm run build
+      - name: Build project
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_ADMIN_EMAIL: ${{ secrets.VITE_SUPABASE_ADMIN_EMAIL }}
+          VITE_SUPABASE_ADMIN_PASSWORD: ${{ secrets.VITE_SUPABASE_ADMIN_PASSWORD }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'

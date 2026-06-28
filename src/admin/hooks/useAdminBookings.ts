@@ -34,7 +34,7 @@ export const useAdminBookings = () => {
       
       // Controllo credenziali mancanti
       if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-        throw new Error("Credenziali Supabase mancanti. Aggiungi VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY nei Secrets di AI Studio.");
+        throw new Error("Credenziali Supabase mancanti. Assicurati di aver creato un file .env con VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.");
       }
 
       const { data, error } = await supabase
