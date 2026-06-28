@@ -3,13 +3,19 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 
+// Carica le variabili d'ambiente per la modalità corrente
 export default defineConfig(({mode}) => {
-  const env = loadEnv(mode, '.', '');
+  // Invece di caricare solo da file, ora usiamo process.env, che è dove GitHub Actions mette i secrets
+  const env = loadEnv(mode, process.cwd(), '');
   return {
     base: '/dashOlha.github.io/',
     plugins: [react(), tailwindcss()],
+    // Definiamo TUTTE le variabili che l'app deve vedere, non solo quella di Gemini
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL),
+      'import.meta.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(env.VITE_SUPABASE_ANON_KEY),
+      'import.meta.env.VITE_SUPABASE_ADMIN_EMAIL': JSON.stringify(env.VITE_SUPABASE_ADMIN_EMAIL),
+      'import.meta.env.VITE_SUPABASE_ADMIN_PASSWORD': JSON.stringify(env.VITE_SUPABASE_ADMIN_PASSWORD),
     },
     resolve: {
       alias: {
