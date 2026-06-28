@@ -1,0 +1,20 @@
+{
+  "short_name": "Dash Olha",
+  "name": "Dashboard Admin Olha",
+  "icons": [
+    {
+      "src": "/dashOlha.github.io/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/dashOlha.github.io/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/dashOlha.github.io/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
