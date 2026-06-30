@@ -1,26 +1,25 @@
 import { supabase } from '../../lib/supabase';
 
 /**
- * Utility per l'autenticazione admin con PIN.
+ * Utility per l'autenticazione admin con password.
  */
-const ADMIN_PIN = "1234"; // PIN fisso richiesto
 const SESSION_KEY = "admin_authenticated";
-
+// Password fissa per accedere alla dashboard.
+const DASHBOARD_PASSWORD = "EnK&c)LOor7pIFdVr"; // <-- CAMBIA QUESTA PASSWORD!
+// Credenziali per l'autenticazione a Supabase (per vedere dati riservati come recensioni non approvate)
 const ADMIN_EMAIL = import.meta.env.VITE_SUPABASE_ADMIN_EMAIL || '';
 const ADMIN_PASSWORD = import.meta.env.VITE_SUPABASE_ADMIN_PASSWORD || '';
 
 /**
- * Verifica se il PIN inserito è corretto e salva la sessione.
+ * Verifica se la password inserita è corretta e salva la sessione.
  * Se sono presenti credenziali admin, esegue anche il login Supabase.
- * @param pin Il PIN inserito dall'utente.
+ * @param password La password inserita dall'utente.
  * @returns Oggetto con successo e messaggio di errore opzionale.
  */
-export const loginAdmin = async (pin: string): Promise<{ success: boolean; error?: string }> => {
-  if (pin !== ADMIN_PIN) {
-    return { success: false, error: 'PIN errato. Riprova.' };
+export const loginAdmin = async (password: string): Promise<{ success: boolean; error?: string }> => {
+  if (password !== DASHBOARD_PASSWORD) {
+    return { success: false, error: 'Password errata. Riprova.' };
   }
-
-  // PIN corretto - salva la sessione locale
   sessionStorage.setItem(SESSION_KEY, 'true');
 
   // Prova il login Supabase se le credenziali sono impostate

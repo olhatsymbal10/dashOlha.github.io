@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginAdmin } from '../utils/adminAuth';
 
 export const PinLogin: React.FC = () => {
-  const [pin, setPin] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -16,14 +16,14 @@ export const PinLogin: React.FC = () => {
     setLoading(true);
     setError('');
 
-    const result = await loginAdmin(pin);
+    const result = await loginAdmin(password);
     setLoading(false);
 
     if (result.success) {
       navigate('/admin/dashboard');
     } else {
-      setError(result.error || 'PIN errato. Riprova.');
-      setPin('');
+      setError(result.error || 'Password errata. Riprova.');
+      setPassword('');
     }
   };
 
@@ -33,22 +33,19 @@ export const PinLogin: React.FC = () => {
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Accesso Admin</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="pin" className="block text-sm font-medium text-gray-700 mb-2">
-              Inserisci PIN
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              Inserisci Password
             </label>
             <input
-              id="pin"
+              id="password"
               type="password"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              maxLength={4}
-              value={pin}
+              value={password}
               onChange={(e) => {
-                setPin(e.target.value);
+                setPassword(e.target.value);
                 setError('');
               }}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center text-2xl tracking-widest min-h-[48px]"
-              placeholder="••••"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[48px]"
+              placeholder="La tua password"
               required
             />
           </div>
